@@ -15,7 +15,7 @@ test.describe('Inventory Page', () => {
 
     test('@inventory user can reach inventory page after login', async  ({ page }) => {
         await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
-        await expect(inventoryPage.getInventoryTitle()).toc('Products');
+        await expect(inventoryPage.getInventoryTitle()).toContainText('Products');
     });
 
     test('@inventory user can view products on the inventory page', async ({ page }) => {
