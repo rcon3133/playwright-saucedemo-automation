@@ -35,7 +35,7 @@ export default defineConfig({
     
     headless: true,
     launchOptions: {
-        slowMo: 1000
+        slowMo: process.env.CI ? 0 : 1000
     },
 
     screenshot: 'only-on-failure',
