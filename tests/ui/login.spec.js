@@ -46,4 +46,25 @@ test.describe('Login Page', () => {
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
     await expect(page.locator('.title')).toHaveText('Products');
   });
+
+  test('@login missing username shows error message', async ({ page }) => {
+    await loginPage.login('', users.standard.password);
+    await expect(loginPage.errorMessage).toHaveText(
+      'Epic sadface: Username is required'
+    );
+  });
+
+  test('@login missing password shows error message', async ({ page }) => {
+    await loginPage.login(users.standard.username, '');
+    await expect(loginPage.errorMessage).toHaveText(
+      'Epic sadface: Password is required'
+    );
+  });
+
+  test('@login invalid credentials shows error message', async ({ page }) => {
+    await loginPage.login('invalid_user', 'invalid_password');
+    await expect(loginPage.errorMessage).toHaveText(
+      'Epic sadface: Username and password do not match any user in this service'
+    );
+  });
 });
